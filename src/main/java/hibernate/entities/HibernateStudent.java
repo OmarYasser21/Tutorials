@@ -37,7 +37,10 @@ public class HibernateStudent {
     @Column(name = "national_id")
     private Long nationalId;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
     @JoinTable(
             name = "student_course",
             joinColumns = @JoinColumn(name = "student_id"),
@@ -49,7 +52,7 @@ public class HibernateStudent {
     public HibernateStudent() {
     }
 
-    public HibernateStudent(String firstName, String lastName, int age, Gender gender, String email, String phoneNumber, Long nationalId) {
+    public HibernateStudent(String firstName, String lastName, int age, Gender gender, String email, String phoneNumber, Long nationalId, Set<HibernateCourse> courses) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -57,6 +60,7 @@ public class HibernateStudent {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.nationalId = nationalId;
+        this.courses = courses;
     }
 
     public UUID getId() {

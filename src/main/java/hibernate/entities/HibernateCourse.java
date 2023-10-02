@@ -32,11 +32,14 @@ public class HibernateCourse {
     @Column(name = "is_started")
     private boolean isStarted;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "instructor_id")
     private HibernateInstructor instructor;
 
-    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "courses", fetch = FetchType.EAGER, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
     private Set<HibernateStudent> students;
     public HibernateCourse(){}
     public HibernateCourse(String name, Timestamp startDate, Timestamp endDate, Level level, boolean isStarted, HibernateInstructor instructor, Set<HibernateStudent> students) {

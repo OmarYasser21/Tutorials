@@ -17,7 +17,7 @@ public class JoinQueries {
     public void getInstructorCourseDetails() {
         try {
             String sql = "SELECT id, instructor_name, course_names " +
-                    "FROM instructor_course_details "; // Replace with your view name
+                    "FROM instructor_course_details ";
 
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();

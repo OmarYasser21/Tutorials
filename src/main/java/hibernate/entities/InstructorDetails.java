@@ -17,14 +17,12 @@ public class InstructorDetails {
     @Column(name = "youtube_channel")
     private String youtubeChannel;
 
-    @OneToOne
-    @JoinColumn(name = "instructor_id")
+    @OneToOne(mappedBy = "instructorDetails")
     private HibernateInstructor instructor;
 
-    public InstructorDetails(String hobbies, String youtubeChannel, HibernateInstructor instructor) {
+    public InstructorDetails(String hobbies, String youtubeChannel) {
         this.hobbies = hobbies;
         this.youtubeChannel = youtubeChannel;
-        this.instructor = instructor;
     }
     public InstructorDetails() {}
 

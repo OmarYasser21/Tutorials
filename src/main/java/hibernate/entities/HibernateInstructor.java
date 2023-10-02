@@ -2,6 +2,7 @@ package hibernate.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,8 +26,12 @@ public class HibernateInstructor {
     @Column(name = "title")
     private String title;
 
-    @OneToMany(mappedBy = "instructor")
+    @OneToMany(mappedBy = "instructor", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<HibernateCourse> courses;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "instructor_details_id")
+    private InstructorDetails instructorDetails;
 
     public InstructorDetails getInstructorDetails() {
         return instructorDetails;
@@ -36,25 +41,14 @@ public class HibernateInstructor {
         this.instructorDetails = instructorDetails;
     }
 
-    @OneToOne(mappedBy = "instructor")
-    private InstructorDetails instructorDetails;
 
-    public List<HibernateCourse> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<HibernateCourse> courses) {
-        this.courses = courses;
-    }
-
-    public HibernateInstructor(String firstName, String lastName, String phoneNumber, String email, String title, InstructorDetails instructorDetails, List<HibernateCourse> courses) {
+    public HibernateInstructor(String firstName, String lastName, String phoneNumber, String email, String title, InstructorDetails instructorDetails) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.title = title;
         this.instructorDetails = instructorDetails;
-        this.courses = courses;
     }
     public HibernateInstructor(){}
 
@@ -105,5 +99,13 @@ public class HibernateInstructor {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<HibernateCourse> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<HibernateCourse> courses) {
+        this.courses = courses;
     }
 }

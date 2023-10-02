@@ -21,22 +21,6 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
       InstructorService instructorService = new InstructorService();
-       // hibernate.entities.Instructor newInstructor = new hibernate.entities.Instructor("Mazen", "Ali", "010992101", "mazen@gmail.com", "Math TA");
-//        instructorService.addInstructor(newInstructor);
-//        System.out.println("New instructor added: " + newInstructor);
-     //   InstructorDTO retrievedInstructor = instructorService.getInstructorById(1);
-     //   System.out.println("Retrieved instructor by ID: " + retrievedInstructor);
-      //  instructorService.updateInstructor(1, "Omar", "Yasser", null, null, null);
-
-       // instructorService.deleteInstructor(9);
-
-        List<InstructorDTO> allInstructors = instructorService.getAllInstructors();
-        System.out.println("All Instructors:");
-        for (InstructorDTO instructor : allInstructors) {
-            System.out.println(instructor);
-        }
-
-        instructorService.close();
 
     }
 

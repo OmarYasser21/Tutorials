@@ -4,6 +4,7 @@ import hibernate.entities.HibernateCourse;
 import hibernate.entities.InstructorDetails;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InstructorDTO {
     private int id;
@@ -12,28 +13,27 @@ public class InstructorDTO {
     private String phoneNumber;
     private String email;
     private String title;
-    private List<HibernateCourse> courses;
-    private InstructorDetails instructorDetails;
+    private List<CourseDTO> courses;
+    private InstructorDetailsDTO instructorDetails;
 
 
-    public InstructorDetails getInstructorDetails() {
+    public InstructorDetailsDTO getInstructorDetails() {
         return instructorDetails;
     }
 
-    public void setInstructorDetails(InstructorDetails instructorDetails) {
+    public void setInstructorDetails(InstructorDetailsDTO instructorDetails) {
         this.instructorDetails = instructorDetails;
     }
 
 
 
-    public InstructorDTO(String firstName, String lastName, String phoneNumber, String email, String title, InstructorDetails instructorDetails, List<HibernateCourse> courses) {
+    public InstructorDTO(String firstName, String lastName, String phoneNumber, String email, String title, InstructorDetailsDTO instructorDetails) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.title = title;
         this.instructorDetails = instructorDetails;
-        this.courses = courses;
     }
 
     public InstructorDTO(){}
@@ -84,23 +84,42 @@ public class InstructorDTO {
     public void setTitle(String title) {
         this.title = title;
     }
-    public List<HibernateCourse> getCourses() {
+    public List<CourseDTO> getCourses() {
         return courses;
     }
 
-    public void setCourses(List<HibernateCourse> courses) {
+    public void setCourses(List<CourseDTO> courses) {
         this.courses = courses;
     }
-    @Override
-    public String toString() {
-        return "InstructorDTO{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", title='" + title + '\'' +
-                '}';
+
+    public static void printInstructor(InstructorDTO dto) {
+        System.out.println("Instructor Details:");
+        System.out.println("First Name: " + dto.getFirstName());
+        System.out.println("Last Name: " + dto.getLastName());
+        System.out.println("Phone Number: " + dto.getPhoneNumber());
+        System.out.println("Email: " + dto.getEmail());
+        System.out.println("Title: " + dto.getTitle());
+
+        // Print InstructorDetails if available
+        if (dto.getInstructorDetails() != null) {
+            System.out.println("Hobbies: " + dto.getInstructorDetails().getHobbies());
+            System.out.println("YouTube Channel: " + dto.getInstructorDetails().getYoutubeChannel());
+        }
+
+        // Print associated courses
+        List<CourseDTO> courses = dto.getCourses();
+        if (courses != null && !courses.isEmpty()) {
+            System.out.print("Courses Taught: ");
+            String courseNames = courses.stream()
+                    .map(CourseDTO::getName)
+                    .collect(Collectors.joining(", "));
+            System.out.println(courseNames);
+        } else {
+            System.out.println("No courses associated with this instructor.");
+        }
+
+        System.out.println();
     }
+
 
 }

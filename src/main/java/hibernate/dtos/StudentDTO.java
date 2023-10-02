@@ -19,7 +19,7 @@ public class StudentDTO {
     private Set<HibernateCourse> courses;
 
     public StudentDTO(){}
-    public StudentDTO(String firstName, String lastName, int age, Gender gender, String email, String phoneNumber, Long nationalId) {
+    public StudentDTO(String firstName, String lastName, int age, Gender gender, String email, String phoneNumber, Long nationalId, Set<HibernateCourse> courses) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -27,6 +27,7 @@ public class StudentDTO {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.nationalId = nationalId;
+        this.courses = courses;
     }
 
     public UUID getId() {
@@ -99,20 +100,6 @@ public class StudentDTO {
 
     public void setCourses(Set<HibernateCourse> courses) {
         this.courses = courses;
-    }
-
-    @Override
-    public String toString() {
-        return "StudentDTO{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                ", gender='" + gender + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", nationalId=" + nationalId +
-                '}';
     }
 
 }

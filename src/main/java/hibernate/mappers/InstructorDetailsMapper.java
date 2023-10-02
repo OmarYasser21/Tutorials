@@ -11,13 +11,10 @@ public class InstructorDetailsMapper {
             return null;
         }
 
-        InstructorDetailsDTO dto = new InstructorDetailsDTO();
-        dto.setId(instructorDetails.getId());
-        dto.setHobbies(instructorDetails.getHobbies());
-        dto.setYoutubeChannel(instructorDetails.getYoutubeChannel());
-        dto.setInstructor(instructorDetails.getInstructor());
-
-        return dto;
+        return new InstructorDetailsDTO(
+                instructorDetails.getHobbies(),
+                instructorDetails.getYoutubeChannel()
+        );
     }
 
     public static InstructorDetails mapToEntity(InstructorDetailsDTO dto) {
@@ -25,11 +22,9 @@ public class InstructorDetailsMapper {
             return null;
         }
 
-        InstructorDetails entity = new InstructorDetails();
-        entity.setId(dto.getId());
-        entity.setHobbies(dto.getHobbies());
-        entity.setYoutubeChannel(dto.getYoutubeChannel());
-        entity.setInstructor(dto.getInstructor());
-        return entity;
+        return new InstructorDetails(
+                dto.getHobbies(),
+                dto.getYoutubeChannel()
+        );
     }
 }

@@ -43,22 +43,12 @@ public class InstructorDetailsDTO {
         this.instructor = instructor;
     }
 
-    public InstructorDetailsDTO(String hobbies, String youtubeChannel, HibernateInstructor instructor) {
+    public InstructorDetailsDTO(String hobbies, String youtubeChannel) {
         this.hobbies = hobbies;
         this.youtubeChannel = youtubeChannel;
-        this.instructor = instructor;
     }
 
     public InstructorDetailsDTO() {
     }
 
-    @Override
-    public String toString() {
-        return "InstructorDetailsDTO{" +
-                "id=" + id +
-                ", hobbies='" + hobbies + '\'' +
-                ", youtubeChannel='" + youtubeChannel + '\'' +
-                ", instructor='" + instructor + '\'' +
-                '}';
-    }
 }

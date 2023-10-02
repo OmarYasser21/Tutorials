@@ -3,32 +3,32 @@ package hibernate.mappers;
 import hibernate.dtos.InstructorDTO;
 import hibernate.entities.HibernateInstructor;
 
+import java.util.Collections;
+
 public class InstructorMapper {
     public static InstructorDTO mapToDTO(HibernateInstructor instructor) {
-        InstructorDTO dto = new InstructorDTO();
-        dto.setId(instructor.getId());
-        dto.setFirstName(instructor.getFirstName());
-        dto.setLastName(instructor.getLastName());
-        dto.setPhoneNumber(instructor.getPhoneNumber());
-        dto.setEmail(instructor.getEmail());
-        dto.setTitle(instructor.getTitle());
-        dto.setInstructorDetails(instructor.getInstructorDetails());
-        dto.setCourses(instructor.getCourses());
-        return dto;
+        return new InstructorDTO(
+                instructor.getFirstName(),
+                instructor.getLastName(),
+                instructor.getPhoneNumber(),
+                instructor.getEmail(),
+                instructor.getTitle(),
+                InstructorDetailsMapper.mapToDTO(instructor.getInstructorDetails())
+        );
     }
+
 
     public static HibernateInstructor mapToEntity(InstructorDTO dto) {
         if (dto == null) {
             return null;
         }
-
-        HibernateInstructor entity = new HibernateInstructor();
-        entity.setId(dto.getId());
-        entity.setFirstName(dto.getFirstName());
-        entity.setLastName(dto.getLastName());
-        entity.setPhoneNumber(dto.getPhoneNumber());
-        entity.setEmail(dto.getEmail());
-        entity.setTitle(dto.getTitle());
-        return entity;
+        return new HibernateInstructor(
+                dto.getFirstName(),
+                dto.getLastName(),
+                dto.getPhoneNumber(),
+                dto.getEmail(),
+                dto.getTitle(),
+                InstructorDetailsMapper.mapToEntity(dto.getInstructorDetails())
+        );
     }
 }
